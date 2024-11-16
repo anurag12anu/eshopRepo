@@ -1,8 +1,15 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models.product import Product
 
-def index (request):
-    return render(request, 'index.html')
 
-def order (request):
-    return render(request, 'order/order.html')
+def index(request):
+   all_products= Product.get_allProduct()
+   print(all_products)
+   return render(request, 'index.html', {'products':all_products})
+   
+
+
+
+
+
