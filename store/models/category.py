@@ -5,3 +5,7 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+    
+    @staticmethod
+    def get_allCategory():
+        return Category.objects.all()
