@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+  <div class="col-md-6">
+    <h1 class="text-center mb-4">Sign Up</h1>
+    <script>
+      // Function to hide the message after 10 seconds
+      function hideMessage() {
+          setTimeout(function() {
+              const messageElement = document.getElementById('message');
+              if (messageElement) {
+                  messageElement.style.display = 'none';
+              }
+          }, 5000); // 10000 milliseconds = 10 seconds
+      }
+  </script>
+
+    <form method="POST" action="{% url 'signup' %}">
+      {% csrf_token %}
+      
+      <div class="mb-3">
+        <label for="first_name" class="form-label">First Name</label>
+        <input type="text" class="form-control" id="first_name" name="first_name" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="last_name" class="form-label">Last Name</label>
+        <input type="text" class="form-control" id="last_name" name="last_name" required>
+      </div>
+      <div class="mb-3">
+        <label for="mno" class="form-label">Mno.</label>
+        <input type="text" class="form-control" id="mno" name="mno" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" name="email" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" name="password" required>
+      </div>
+
+      
+
+      <button type="submit" class="btn btn-success w-100">Sign Up</button>
+    </form>
+    {% if message %}
+        <p id="message" style="color: green;">{{ message }}</p>
+        <script>hideMessage();</script>  <!-- Calls hideMessage() to hide the message after 10 seconds -->
+    {% endif %}
+    
+    {% if error %}
+        <p id="error" style="color: red;">{{ error }}</p>
+        <script>hideMessage();</script>  <!-- Calls hideMessage() to hide the error message after 10 seconds -->
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
