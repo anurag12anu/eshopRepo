@@ -40,17 +40,26 @@ def signup(request):
             return HttpResponseBadRequest("All fields are required.")
 
         # Save to database
-        try:
-            customer = Customer(
+        error_message=None
+        
+        if (not first_name):
+            error_message="first_name is required"
+        elif len(first_name)<4:
+            error_message="first_name should be 4 char"
+        
+        if not error_message:
+            
+            try:
+                customer = Customer(
                 first_name=first_name,
                 last_name=last_name,
                 mno=mno,
                 email=email,
                 password=password  # Consider hashing the password
             )
-            customer.save()
-        except Exception as e:
-            return HttpResponseBadRequest(f"Error saving customer: {str(e)}")
+                customer.register()
+            except Exception as e:
+                return HttpResponseBadRequest(f"Error saving customer: {str(e)}")
 
         # Return success response
         return render(request, 'signup.html', {'message': f'Signup successful for {email}!'})

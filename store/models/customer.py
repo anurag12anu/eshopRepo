@@ -9,4 +9,7 @@ class Customer(models.Model):
     email=models.CharField(max_length=50)
     password=models.EmailField(max_length=500)
     
+    def register(self):
+        self.save()
+    
     
