@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse, HttpResponseBadRequest
 from .models.product import Product
 from .models.category import Category
@@ -62,7 +62,7 @@ def signup(request):
                 return HttpResponseBadRequest(f"Error saving customer: {str(e)}")
 
         # Return success response
-        return render(request, 'signup.html', {'message': f'Signup successful for {email}!'})
+        return redirect('homepage')
     return HttpResponse("Method not allowed", status=405)
 
 def signin(request):
